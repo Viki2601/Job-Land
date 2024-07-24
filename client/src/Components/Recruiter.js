@@ -7,7 +7,7 @@ export default function Recruiter() {
     const { id } = useParams();
     const [recruiter, setRecruiter] = useState({});
     const [postedJobs, setPostedJobs] = useState([]);
-    console.log(postedJobs)
+    const url = "https://job-land-backend.onrender.com";
     const company = postedJobs.map((e) => (e.company));
     const about = postedJobs.map((e) => (e.aboutCompany));
     const services = postedJobs.map((e) => (e.services));
@@ -21,7 +21,7 @@ export default function Recruiter() {
 
     const fetchRecruiter = async () => {
         try {
-            const res = await axios.get(`http://localhost:8000/recruiter/${id}`);
+            const res = await axios.get(`${url}/recruiter/${id}`);
             setRecruiter(res.data);
         } catch (e) {
             console.log(e);
@@ -35,7 +35,7 @@ export default function Recruiter() {
     const fetchJobs = async () => {
         try {
             const cookieVal = recruiter.email;
-            const res = await axios.post('http://localhost:8000/jobsByMail', { cookieVal });
+            const res = await axios.post(`${url}/jobsByMail`, { cookieVal });
             setPostedJobs(res.data);
         } catch (e) {
             toast.error("Something went wrong!");
