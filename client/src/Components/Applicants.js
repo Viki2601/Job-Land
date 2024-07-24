@@ -7,10 +7,11 @@ import { ToastContainer, toast } from 'react-toastify';
 export default function Applicants() {
     const { id } = useParams();
     const [applicants, setApplicants] = useState([]);
+    const url = "https://job-land-backend.onrender.com";
 
     const fetchApplicants = async () => {
         try {
-            await axios.post(`http://localhost:8000/applicantsByJobId/${id}`)
+            await axios.post(`${url}/applicantsByJobId/${id}`)
                 .then(res => {
                     setApplicants(res.data);
                 }).catch(e => {
@@ -28,7 +29,7 @@ export default function Applicants() {
     const sendSelectionMail = async (applicant) => {
         try {
             const { _id, email, fullName, applicationFor, applicationJobId, company } = applicant;
-            await axios.post("http://localhost:8000/sendSelectionMail", {
+            await axios.post(`${url}/sendSelectionMail`, {
                 _id,
                 email,
                 fullName,
@@ -54,7 +55,7 @@ export default function Applicants() {
     const sendRejectionMail = async (applicant) => {
         try {
             const { _id, email, fullName, applicationFor, applicationJobId, company } = applicant;
-            await axios.post("http://localhost:8000/sendRejectionMail", {
+            await axios.post(`${url}/sendRejectionMail`, {
                 _id,
                 email,
                 fullName,
@@ -112,7 +113,7 @@ export default function Applicants() {
                                                 <p className="text-gray-900 whitespace-no-wrap">{applicant.applicationFor}</p>
                                             </td>
                                             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                                                <a href={`http://localhost:8000/${applicant.resumePath}`} className="text-fuchsia-600 whitespace-no-wrap">
+                                                <a href={`${url}/${applicant.resumePath}`} className="text-fuchsia-600 whitespace-no-wrap">
                                                     {applicant.resumeFilename}
                                                 </a>
                                             </td>
