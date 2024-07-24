@@ -45,7 +45,7 @@ export default function AdminAccount() {
 
     const admin = async () => {
         try {
-            await axios.post("http://localhost:8000/userAccount", { cookieVal })
+            await axios.post("https://job-land-backend.onrender.com/userAccount", { cookieVal })
                 .then(res => {
                     setAdminDetails(res.data);
                 }).catch(e => {
@@ -58,7 +58,7 @@ export default function AdminAccount() {
 
     const applicant = async () => {
         try {
-            await axios.get("http://localhost:8000/applicant", { params: { role: "jobSeeker" } })
+            await axios.get("https://job-land-backend.onrender.com/applicant", { params: { role: "jobSeeker" } })
                 .then(res => {
                     setApplicantDetails(res.data);
                     setApplicantCount(res.data.length);
@@ -72,7 +72,7 @@ export default function AdminAccount() {
 
     const recruiter = async () => {
         try {
-            await axios.get("http://localhost:8000/recruiter", { params: { role: "employer" } })
+            await axios.get("https://job-land-backend.onrender.com/recruiter", { params: { role: "employer" } })
                 .then(res => {
                     setEmployerDetails(res.data)
                     setEmployerCount(res.data.length);
@@ -86,7 +86,7 @@ export default function AdminAccount() {
 
     const application = async () => {
         try {
-            await axios.get("http://localhost:8000/application")
+            await axios.get("https://job-land-backend.onrender.com/application")
                 .then(res => {
                     setApplicationCount(res.data);
                 }).catch(e => {
@@ -99,7 +99,7 @@ export default function AdminAccount() {
 
     const jobs = async () => {
         try {
-            await axios.get("http://localhost:8000/jobs")
+            await axios.get("https://job-land-backend.onrender.com/jobs")
                 .then(res => {
                     setJobsCount(res.data);
                 }).catch(e => {
@@ -112,7 +112,7 @@ export default function AdminAccount() {
 
     const fetchGraphData = async () => {
         try {
-            const res = await axios.get("http://localhost:8000/graphData");
+            const res = await axios.get("https://job-land-backend.onrender.com/graphData");
             setGraphData(res.data);
         } catch (e) {
             console.log(e)
@@ -122,7 +122,7 @@ export default function AdminAccount() {
 
     const fetchJobGraphData = async () => {
         try {
-            const res = await axios.get("http://localhost:8000/jobGraphData");
+            const res = await axios.get("https://job-land-backend.onrender.com/jobGraphData");
             setJobGraphData(res.data);
         } catch (e) {
             console.log(e)
@@ -132,7 +132,7 @@ export default function AdminAccount() {
 
     const fetchRecentJobs = async () => {
         try {
-            const res = await axios.get("http://localhost:8000/recentJobs");
+            const res = await axios.get("https://job-land-backend.onrender.com/recentJobs");
             setRecentJobs(res.data);
         } catch (e) {
             toast.error("Something went wrong!");
@@ -141,7 +141,7 @@ export default function AdminAccount() {
 
     const recruiterJobs = async () => {
         try {
-            await axios.post("http://localhost:8000/jobsByMail", { recruiterEmail })
+            await axios.post("https://job-land-backend.onrender.com/jobsByMail", { recruiterEmail })
                 .then(res => {
                     setJobList(res.data);
                 }).catch(e => {
@@ -168,7 +168,7 @@ export default function AdminAccount() {
     const handleUpdateChange = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:8000/updateProfile', adminDetails)
+            await axios.post('https://job-land-backend.onrender.com/updateProfile', adminDetails)
                 .then(res => {
                     toast.success('Profile updated Successfully');
                     setUpdateProfileMenu(false);
