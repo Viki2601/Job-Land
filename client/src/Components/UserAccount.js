@@ -11,7 +11,7 @@ import { FaLocationDot } from "react-icons/fa6";
 export default function UserAccount() {
     const [cookieVal] = useState(Cookies.get('email'));
     const [selectedTab, setSelectedTab] = useState('applied');
-    // Menu Selection & Set Variables 
+    const url = "https://job-land-backend.onrender.com";
     const [profileCompletion, setProfileCompletion] = useState(0);
     const [profileMenu, setProfileMenu] = useState(true);
     const [employerMenu, setEmployerMenu] = useState(false);
@@ -78,7 +78,7 @@ export default function UserAccount() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:8000/postJobs", { formData, cookieVal })
+            await axios.post(`${url}/postJobs`, { formData, cookieVal })
                 .then(res => {
                     if (res.data === "pass") {
                         toast.success("Job added Successfully");
@@ -113,7 +113,7 @@ export default function UserAccount() {
 
     const user = async () => {
         try {
-            await axios.post("http://localhost:8000/userAccount", { cookieVal })
+            await axios.post(`${url}/userAccount`, { cookieVal })
                 .then(res => {
                     setUserDetails(res.data.check);
                     setProfileCompletion(res.data.profileCompletion);
@@ -128,7 +128,7 @@ export default function UserAccount() {
 
     const jobs = async () => {
         try {
-            await axios.post("http://localhost:8000/jobsByMail", { cookieVal })
+            await axios.post(`${url}/jobsByMail`, { cookieVal })
                 .then(res => {
                     setJobList(res.data);
                 }).catch(e => {
@@ -142,7 +142,7 @@ export default function UserAccount() {
 
     const appliedJobs = async () => {
         try {
-            await axios.post("http://localhost:8000/appliedJobsByMail", { cookieVal })
+            await axios.post(`${url}/appliedJobsByMail`, { cookieVal })
                 .then(res => {
                     setAppliedJobList(res.data);
                 }).catch(e => {
@@ -156,7 +156,7 @@ export default function UserAccount() {
 
     const savedJobs = async () => {
         try {
-            await axios.post("http://localhost:8000/savedJobsByMail", { cookieVal })
+            await axios.post(`${url}/savedJobsByMail`, { cookieVal })
                 .then(res => {
                     setSavedJobList(res.data);
                 }).catch(e => {
@@ -187,7 +187,7 @@ export default function UserAccount() {
             formData.append('resume', resumeFile);
         }
         try {
-            await axios.post('http://localhost:8000/updateProfile', formData, {
+            await axios.post(`${url}/updateProfile`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -351,7 +351,7 @@ export default function UserAccount() {
                             {userDetails.resumePath && (
                                 <div className='mt-4 lg:w-3/4'>
                                     <h3 className='text-lg font-semibold'>Resume</h3>
-                                    <a href={`http://localhost:8000/${userDetails.resumePath}`}>
+                                    <a href={`${url}/${userDetails.resumePath}`}>
                                         <div className='border rounded-lg p-4 shadow-md'>
                                             <div className='flex items-center'>
                                                 <FaFilePdf className='text-fuchsia-600 text-4xl' />
