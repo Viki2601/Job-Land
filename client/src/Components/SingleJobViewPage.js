@@ -7,6 +7,7 @@ import { FaArrowLeft, FaIndustry } from 'react-icons/fa';
 
 export default function SingleJobViewPage() {
     const { id } = useParams();
+    const url = "https://job-land-backend.onrender.com";
     const navigate = useNavigate();
     const [job, setJob] = useState({
         company: '',
@@ -22,7 +23,7 @@ export default function SingleJobViewPage() {
 
     const fetchJobDetails = async () => {
         try {
-            const res = await axios.post(`http://localhost:8000/jobsById/${id}`);
+            const res = await axios.post(`${url}/jobsById/${id}`);
             setJob(res.data);
         } catch (error) {
             toast.error("Oops! Failed to fetch job details");
