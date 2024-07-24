@@ -8,6 +8,8 @@ export default function ResetPassword() {
     const navigate = useNavigate()
     const [password, setPassword] = useState('')
     const [repassword, setRepassword] = useState('')
+    const url = "https://job-land-backend.onrender.com";
+
 
     const submit = async (e) => {
         e.preventDefault();
@@ -18,7 +20,7 @@ export default function ResetPassword() {
                 toast.error("Password must be minimum 8 characters");
             } else {
                 const cookieVal = Cookies.get('resetEmail')
-                await axios.post("http://localhost:8000/resetPassword", { cookieVal, password })
+                await axios.post(`${url}/resetPassword`, { cookieVal, password })
                     .then(res => {
                         if (res.data === "pass") {
                             toast.success("Password changed successfully");
