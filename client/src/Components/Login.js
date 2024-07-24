@@ -8,6 +8,7 @@ import Cookies from 'js-cookie';
 
 export default function Login() {
     const navigate = useNavigate();
+    const url = "https://job-land-backend.onrender.com";
     const [form, setForm] = useState({
         email: "",
         password: ""
@@ -21,7 +22,7 @@ export default function Login() {
     const submit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:8000/login", { form })
+            await axios.post(`${url}/login`, { form })
                 .then(res => {
                     if (res.data === "loginpass") {
                         Cookies.set("email", form.email, { expires: 7 })
