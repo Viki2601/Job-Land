@@ -7,10 +7,12 @@ export default function Candidate() {
     const { id } = useParams();
     const [candidate, setCandidate] = useState({});
     const [appliedJobs, setAppliedJobs] = useState([]);
+    const url = "https://job-land-backend.onrender.com";
+
 
     const fetchCandidate = async () => {
         try {
-            const res = await axios.get(`http://localhost:8000/candidate/${id}`);
+            const res = await axios.get(`${url}/candidate/${id}`);
             setCandidate(res.data);
         } catch (e) {
             console.log(e);
@@ -21,7 +23,7 @@ export default function Candidate() {
     const fetchApplication = async () => {
         try {
             const cookieVal = candidate.email;
-            const res = await axios.post('http://localhost:8000/appliedJobsByMail', { cookieVal });
+            const res = await axios.post(`${url}/appliedJobsByMail`, { cookieVal });
             setAppliedJobs(res.data);
         } catch (e) {
             toast.error("Something went wrong!");
