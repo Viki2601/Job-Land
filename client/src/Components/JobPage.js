@@ -13,6 +13,7 @@ export default function JobPage() {
     const [updatePopup, setUpdatePopup] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
     const [openUpdate, setOpenUpdate] = useState(false);
+    const url = "https://job-land-backend.onrender.com";
     const [job, setJob] = useState({
         company: '',
         jobtitle: '',
@@ -31,7 +32,7 @@ export default function JobPage() {
 
     const fetchJobDetails = async () => {
         try {
-            await axios.post(`http://localhost:8000/jobsById/${id}`)
+            await axios.post(`${url}/jobsById/${id}`)
                 .then(res => {
                     setJob(res.data);
                 }).catch(e => {
@@ -49,7 +50,7 @@ export default function JobPage() {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`http://localhost:8000/updateJob/${id}`, job)
+            await axios.post(`${url}/updateJob/${id}`, job)
                 .then(res => {
                     toast.success('Updated Successfully');
                     setUpdatePopup(false);
@@ -74,7 +75,7 @@ export default function JobPage() {
     const handleDeleteJob = async () => {
         try {
             console.log("try")
-            const res = await axios.post(`http://localhost:8000/deleteJob/${id}`);
+            const res = await axios.post(`${url}/deleteJob/${id}`);
             console.log(res)
             if (res.data === "pass") {
                 toast.success("Job removed successfully");
