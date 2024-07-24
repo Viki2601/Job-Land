@@ -8,6 +8,8 @@ export default function ApplicationForm() {
     const navigate = useNavigate();
     const location = useLocation();
     const job = location.state?.job;
+    const url = "https://job-land-backend.onrender.com";
+
 
     const [application, setApplication] = useState({
         fullName: '',
@@ -33,7 +35,7 @@ export default function ApplicationForm() {
         applicationFormDetails.append("resume", resume);
 
         try {
-            const res = await axios.post("http://localhost:8000/application", applicationFormDetails, {
+            const res = await axios.post(`${url}/application`, applicationFormDetails, {
                 headers: { "Content-Type": "multipart/form-data" }
             });
             if (res.data === 'pass') {
