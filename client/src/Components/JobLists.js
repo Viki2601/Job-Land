@@ -14,6 +14,8 @@ export default function JobLists() {
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
   const [detailedJobMenu, setDetailedJobMenu] = useState(false);
+  const url = "https://job-land-backend.onrender.com";
+
 
 
   const [filters, setFilters] = useState({
@@ -26,7 +28,7 @@ export default function JobLists() {
 
   const getAllJobs = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/getAllJobs");
+      const res = await axios.get(`${url}/getAllJobs`);
       if (res.data === "fail") {
         toast.error("Failed to fetch Jobs");
       } else {
@@ -94,7 +96,7 @@ export default function JobLists() {
     try {
       const jobId = selectedJob._id;
       const email = Cookies.get("email");
-      const res = await axios.post("http://localhost:8000/savedJob", { jobId, email })
+      const res = await axios.post(`${url}/savedJob`, { jobId, email })
       if (res.data === "pass") {
         toast.success("Saved Successfully");
       } else {
