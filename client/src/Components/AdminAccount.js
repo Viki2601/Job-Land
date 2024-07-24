@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 export default function AdminAccount() {
     // Fetching Admin Mail from cookies
     const [cookieVal] = useState(Cookies.get('email'));
+    const url = "https://job-land-backend.onrender.com";
 
     // Storing the admin details
     const [adminDetails, setAdminDetails] = useState('');
@@ -45,7 +46,7 @@ export default function AdminAccount() {
 
     const admin = async () => {
         try {
-            await axios.post("https://job-land-backend.onrender.com/userAccount", { cookieVal })
+            await axios.post(`${url}/userAccount`, { cookieVal })
                 .then(res => {
                     setAdminDetails(res.data);
                 }).catch(e => {
@@ -58,7 +59,7 @@ export default function AdminAccount() {
 
     const applicant = async () => {
         try {
-            await axios.get("https://job-land-backend.onrender.com/applicant", { params: { role: "jobSeeker" } })
+            await axios.get(`${url}/applicant`, { params: { role: "jobSeeker" } })
                 .then(res => {
                     setApplicantDetails(res.data);
                     setApplicantCount(res.data.length);
@@ -72,7 +73,7 @@ export default function AdminAccount() {
 
     const recruiter = async () => {
         try {
-            await axios.get("https://job-land-backend.onrender.com/recruiter", { params: { role: "employer" } })
+            await axios.get(`${url}/recruiter`, { params: { role: "employer" } })
                 .then(res => {
                     setEmployerDetails(res.data)
                     setEmployerCount(res.data.length);
@@ -86,7 +87,7 @@ export default function AdminAccount() {
 
     const application = async () => {
         try {
-            await axios.get("https://job-land-backend.onrender.com/application")
+            await axios.get(`${url}/application`)
                 .then(res => {
                     setApplicationCount(res.data);
                 }).catch(e => {
@@ -99,7 +100,7 @@ export default function AdminAccount() {
 
     const jobs = async () => {
         try {
-            await axios.get("https://job-land-backend.onrender.com/jobs")
+            await axios.get(`${url}/jobs`)
                 .then(res => {
                     setJobsCount(res.data);
                 }).catch(e => {
@@ -112,7 +113,7 @@ export default function AdminAccount() {
 
     const fetchGraphData = async () => {
         try {
-            const res = await axios.get("https://job-land-backend.onrender.com/graphData");
+            const res = await axios.get(`${url}/graphData`);
             setGraphData(res.data);
         } catch (e) {
             console.log(e)
@@ -122,7 +123,7 @@ export default function AdminAccount() {
 
     const fetchJobGraphData = async () => {
         try {
-            const res = await axios.get("https://job-land-backend.onrender.com/jobGraphData");
+            const res = await axios.get(`${url}/jobGraphData`);
             setJobGraphData(res.data);
         } catch (e) {
             console.log(e)
@@ -132,7 +133,7 @@ export default function AdminAccount() {
 
     const fetchRecentJobs = async () => {
         try {
-            const res = await axios.get("https://job-land-backend.onrender.com/recentJobs");
+            const res = await axios.get(`${url}/recentJobs`);
             setRecentJobs(res.data);
         } catch (e) {
             toast.error("Something went wrong!");
@@ -141,7 +142,7 @@ export default function AdminAccount() {
 
     const recruiterJobs = async () => {
         try {
-            await axios.post("https://job-land-backend.onrender.com/jobsByMail", { recruiterEmail })
+            await axios.post(`${url}/jobsByMail`, { recruiterEmail })
                 .then(res => {
                     setJobList(res.data);
                 }).catch(e => {
@@ -168,7 +169,7 @@ export default function AdminAccount() {
     const handleUpdateChange = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('https://job-land-backend.onrender.com/updateProfile', adminDetails)
+            await axios.post(`${url}/updateProfile`, adminDetails)
                 .then(res => {
                     toast.success('Profile updated Successfully');
                     setUpdateProfileMenu(false);
