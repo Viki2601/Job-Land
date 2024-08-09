@@ -802,7 +802,7 @@ export default function UserAccount() {
                                     <img className='h-40' src={require('./images/settings.webp')} />
                                 </div>
                             </div>
-                            <div className='lg:w-1/2'>
+                            <div className='w-full px-10 lg:w-1/2 lg:px-0'>
                                 <div className="border-b border-gray-900/10 pb-12" >
                                     <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                         <div className="sm:col-span-full">
